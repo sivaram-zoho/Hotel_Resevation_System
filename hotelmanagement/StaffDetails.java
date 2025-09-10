@@ -3,16 +3,21 @@ package HotelReservationSystem.hotelmanagement;
 import java.util.*;
 
 public class StaffDetails {
+
+    HotelDetails.Hotel hotel;
+
     int staffID;
     String staffName;
     long staffPhone;
     public VariousRole staffRole;
 
-    public StaffDetails(int staffID, String staffName, long staffPhone, VariousRole staffRole) {
+
+    public StaffDetails( int staffID, String staffName, long staffPhone, VariousRole staffRole, HotelDetails.Hotel hotel) {
         this.staffID = generateStaffID();
         this.staffName = staffName;
         this.staffPhone = staffPhone;
         this.staffRole = staffRole;
+        this.hotel=hotel;
     }
 
     public static int generateStaffID() {
@@ -23,18 +28,23 @@ public class StaffDetails {
     public static List<StaffDetails> staffList = new ArrayList<>();
 
     static {
-        staffList.add(new StaffDetails(0, "Shiva", 7373737420L, StaffDetails.VariousRole.MANAGER));
-        staffList.add(new StaffDetails(0, "Sai", 9475949396L, StaffDetails.VariousRole.MANAGER));
-        staffList.add(new StaffDetails(0, "Jack", 9938423049L, StaffDetails.VariousRole.MANAGER));
-        staffList.add(new StaffDetails(0, "Joe", 9728301938L, StaffDetails.VariousRole.MANAGER));
-        staffList.add(new StaffDetails(0, "Raja", 9883949583L, StaffDetails.VariousRole.RECEPTIONIST));
-        staffList.add(new StaffDetails(0, "Balaji", 9274760385L, StaffDetails.VariousRole.RECEPTIONIST));
-        staffList.add(new StaffDetails(0, "Adhi", 9284534789L, StaffDetails.VariousRole.HOUSE_KEEPING));
-        staffList.add(new StaffDetails(0, "Murali", 9023676354L, StaffDetails.VariousRole.RECEPTIONIST));
-        staffList.add(new StaffDetails(0, "Ruban", 7584739483L, StaffDetails.VariousRole.HOUSE_KEEPING));
-        staffList.add(new StaffDetails(0, "Jimmy", 8937462980L, StaffDetails.VariousRole.RECEPTIONIST));
-        staffList.add(new StaffDetails(0, "Karthik", 98327465901L, StaffDetails.VariousRole.HOUSE_KEEPING));
-        staffList.add(new StaffDetails(0, "Guna", 8870090439L, StaffDetails.VariousRole.HOUSE_KEEPING));
+        HotelDetails.Hotel hotelABC = new HotelDetails.Hotel("Hotel ABC, Tambaram");
+        HotelDetails.Hotel hotelSRM = new HotelDetails.Hotel("Hotel SRM,Pallavaram");
+        HotelDetails.Hotel hotelSBM = new HotelDetails.Hotel("Hotel SRM,Guindy");
+        HotelDetails.Hotel hotelKFC = new HotelDetails.Hotel("Hotel KFC,Urapakkam");
+
+        staffList.add(new StaffDetails(0, "Shiva", 7373737420L, StaffDetails.VariousRole.MANAGER,hotelABC));
+        staffList.add(new StaffDetails(0, "Sai", 9475949396L, StaffDetails.VariousRole.MANAGER,hotelSRM));
+        staffList.add(new StaffDetails(0, "Jack", 9938423049L, StaffDetails.VariousRole.MANAGER,hotelSBM));
+        staffList.add(new StaffDetails(0, "Joe", 9728301938L, StaffDetails.VariousRole.MANAGER,hotelKFC));
+        staffList.add(new StaffDetails(0, "Raja", 9883949583L, StaffDetails.VariousRole.RECEPTIONIST,hotelABC));
+        staffList.add(new StaffDetails(0, "Balaji", 9274760385L, StaffDetails.VariousRole.RECEPTIONIST,hotelSRM));
+        staffList.add(new StaffDetails(0, "Murali", 9023676354L, StaffDetails.VariousRole.RECEPTIONIST,hotelSBM));
+        staffList.add(new StaffDetails(0, "Jimmy", 8937462980L, StaffDetails.VariousRole.RECEPTIONIST,hotelKFC));
+        staffList.add(new StaffDetails(0, "Adhi", 9284534789L, StaffDetails.VariousRole.HOUSE_KEEPING,hotelABC));
+        staffList.add(new StaffDetails(0, "Ruban", 7584739483L, StaffDetails.VariousRole.HOUSE_KEEPING,hotelSRM));
+        staffList.add(new StaffDetails(0, "Karthik", 98327465901L, StaffDetails.VariousRole.HOUSE_KEEPING,hotelSBM));
+        staffList.add(new StaffDetails(0, "Guna", 8870090439L, StaffDetails.VariousRole.HOUSE_KEEPING,hotelKFC));
     }
 
 
