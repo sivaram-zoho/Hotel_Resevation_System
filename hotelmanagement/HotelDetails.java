@@ -7,6 +7,7 @@ import java.util.List;
 public class HotelDetails {
 
     public List<Hotel> hotels;
+    public List<GuestDetails> guestDetails;
 
     public HotelDetails() {
         this.hotels = new ArrayList<>();
@@ -14,6 +15,7 @@ public class HotelDetails {
         hotels.add(new Hotel("Hotel SRM,Pallavaram"));
         hotels.add(new Hotel("Hotel SRM,Guindy"));
         hotels.add(new Hotel("Hotel KFC,Urapakkam"));
+        this.guestDetails = new ArrayList<>();
 
     }
 
@@ -22,9 +24,14 @@ public class HotelDetails {
         return hotels;
     }
 
-    public List<GuestDetails> getGuestDetails(Hotel hotel){
-        return hotel.getBookedGuests();
+    public List<GuestDetails> getGuestDetails() {
+        return guestDetails;
     }
+
+    public void addGuest(GuestDetails guest) {
+        guestDetails.add(guest);
+    }
+
 
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
@@ -55,7 +62,6 @@ public class HotelDetails {
         public void setRooms(List<RoomDetails> rooms) {
             this.rooms = rooms;
         }
-
 
 
         public List<GuestDetails> getBookedGuests() {
