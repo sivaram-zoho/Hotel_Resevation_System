@@ -1,212 +1,92 @@
 package HotelReservationSystem.hotelmanagement;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class HotelDetails {
-    String hotelA;
-    String hotelB;
-    String hotelC;
-    String hotelD;
 
-    int roomID;
-    String roomStatus;
-    double pricePerNight;
-    public VariousType roomType;
+    public List<Hotel> hotels;
 
-    int guestID;
-    String guestName;
-    String guestAddress;
-    long guestPhone;
-    public VariousStatus reserveStatus;
-
-    int staffID;
-    String staffName;
-    long staffPhone;
-    public VariousStaffs positions;
-
-    public enum VariousStaffs {
-        MANAGER,
-        RECEPTIONIST,
-        HOUSEKEEPING
-    }
-
-    public HotelDetails(String hotelA, String hotelB, String hotelC, String hotelD) {
-        this.hotelA = hotelA;
-        this.hotelB = hotelB;
-        this.hotelC = hotelC;
-        this.hotelD = hotelD;
-    }
-
-    public String getHotelA() {
-        return hotelA;
-    }
-
-    public String getHotelB() {
-        return hotelB;
-    }
-
-    public String getHotelC() {
-        return hotelC;
-    }
-
-    public String getHotelD() {
-        return hotelD;
-    }
-
-    public void setHotelA(String hotelA) {
-        this.hotelA = "Hotel ABC,Chennai";
-    }
-
-    public void setHotelB(String hotelB) {
-        this.hotelB = "Hotel Sangeeta, Madurai";
-    }
-
-    public void setHotelC(String hotelC) {
-        this.hotelC = "Hotel SRM";
-    }
-
-    public void setHotelD(String hotelD) {
-        this.hotelD = "Hotel SBM";
-    }
-
-
-    public enum VariousType {
-        STANDARD,
-        DELUXE,
-        SUITE
-    }
-
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public String getRoomStatus() {
-        return roomStatus;
-    }
-
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
-
-    public VariousType getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(VariousType roomType) {
-        this.roomType = roomType;
-    }
-
-    public void setRoomStatus(String roomStatus) {
-        this.roomStatus = roomStatus;
-    }
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
-    }
-
-
-    public enum VariousStatus {
-        NEW,
-        PAST
+    public HotelDetails() {
+        this.hotels = new ArrayList<>();
+        hotels.add(new Hotel("Hotel ABC,Tambaram"));
+        hotels.add(new Hotel("Hotel SRM,Pallavaram"));
+        hotels.add(new Hotel("Hotel SRM,Guindy"));
+        hotels.add(new Hotel("Hotel KFC,Urapakkam"));
 
     }
 
-    public int getGuestID() {
-        return guestID;
+
+    public List<Hotel> getHotels() {
+        return hotels;
     }
 
-    public String getName() {
-        return guestName;
+    public List<GuestDetails> getGuestDetails(Hotel hotel){
+        return hotel.getBookedGuests();
     }
 
-    public String getAddress() {
-        return guestAddress;
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
     }
 
-    public long getPhone() {
-        return guestPhone;
-    }
+    public static class Hotel {
+        private String name;
+        private List<RoomDetails> rooms;
+        private final List<GuestDetails> bookedGuests;
+        public Hotel(String name) {
+            this.name = name;
+            this.rooms = RoomDetails.initRooms();
+            this.bookedGuests=new ArrayList<>();
+        }
 
-    public VariousStatus getReserveStatus() {
-        return reserveStatus;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setAddress(String guestAddress) {
-        this.guestAddress = guestAddress;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setName(String guestName) {
-        this.guestName = guestName;
-    }
+        public List<RoomDetails> getRooms() {
+            return rooms;
+        }
 
-    public void setGuestID(int guestID) {
-        this.guestID = guestID;
-    }
+        public void setRooms(List<RoomDetails> rooms) {
+            this.rooms = rooms;
+        }
 
-    public void setPhone(long guestPhone) {
-        this.guestPhone = guestPhone;
-    }
 
-    public void setReserveStatus(VariousStatus reserveStatus) {
-        this.reserveStatus = reserveStatus;
-    }
 
-    public int getStaffID() {
-        return staffID;
-    }
+        public List<GuestDetails> getBookedGuests() {
+            return bookedGuests;
+        }
 
-    public long getGuestPhone() {
-        return guestPhone;
-    }
+        public void addBookedGuest(GuestDetails guest) {
+            bookedGuests.add(guest);
+        }
 
-    public long getStaffPhone() {
-        return staffPhone;
-    }
 
-    public String getGuestAddress() {
-        return guestAddress;
-    }
+        public boolean selectRoom(int roomNumber) {
+            for (RoomDetails room : rooms) {
+                if (room.getRoomNumber() == roomNumber && room.getRoomStatus() == RoomDetails.VariousStatus.AVAILABLE) {
+                    room.setRoomStatus(RoomDetails.VariousStatus.CHECKED_IN);
+                    return true;
+                }
+            }
+            return false;
 
-    public String getGuestName() {
-        return guestName;
-    }
+        }
 
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public VariousStaffs getPositions() {
-        return positions;
-    }
-
-    public void setGuestAddress(String guestAddress) {
-        this.guestAddress = guestAddress;
-    }
-
-    public void setGuestName(String guestName) {
-        this.guestName = guestName;
-    }
-
-    public void setGuestPhone(long guestPhone) {
-        this.guestPhone = guestPhone;
-    }
-
-    public void setPositions(VariousStaffs positions) {
-        this.positions = positions;
-    }
-
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
-
-    public void setStaffPhone(long staffPhone) {
-        this.staffPhone = staffPhone;
+        public List<RoomDetails> getAvailableRooms() {
+            List<RoomDetails> availableRooms = new ArrayList<>();
+            for (RoomDetails room : rooms) {
+                if (room.getRoomStatus() == RoomDetails.VariousStatus.AVAILABLE) {
+                    availableRooms.add(room);
+                }
+            }
+            return availableRooms;
+        }
     }
 
 }
