@@ -37,7 +37,7 @@ public class BookingRooms {
             hotelChoice = scan.nextInt();
             scan.nextLine();
 
-            if (hotelChoice > 0 && hotelChoice < hotelList.size()) {
+            if (hotelChoice > 0 && hotelChoice <= hotelList.size()) {
                 validChoice = true;
             } else {
                 System.out.println("Invalid Choice");
@@ -58,7 +58,7 @@ public class BookingRooms {
         roomChoice = scan.nextInt();
         scan.nextLine();
         String roomChoiceString = String.valueOf(roomChoice);
-        if (!roomChoiceString.matches("^[0-9]")) {
+        if (!roomChoiceString.matches("^[0-9]+$")) {
             throw new InvalidInputException("");
         }
 
@@ -91,7 +91,7 @@ public class BookingRooms {
             scan.nextLine();
 
             String choiceNumberString = String.valueOf(choiceNumber);
-            if (!choiceNumberString.matches("^[0-9]")) {
+            if (!choiceNumberString.matches("^[0-9]+$")) {
                 throw new InvalidInputException("");
             }
 
